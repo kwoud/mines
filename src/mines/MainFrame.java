@@ -33,4 +33,5 @@ public class MainFrame extends JFrame {
 		
 		//c.add(buttons, BorderLayout.NORTH);
 	}
+
 }
