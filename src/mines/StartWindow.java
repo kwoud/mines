@@ -14,7 +14,7 @@ public class StartWindow {
 	}
 	
 	public static void main(String[] args) {
-		// ischedule a job for the event dispatch thread
+		// schedule a job for the event dispatch thread
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				// create and show this apps gui
