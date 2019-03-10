@@ -11,6 +11,7 @@ public class StartWindow {
 			public void run() {
 				JFrame frame = new MainFrame("kwoudMines");
 				frame.setSize(20*60, 15*60);
+				frame.setResizable(false);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}
