@@ -12,7 +12,7 @@ public class StartWindow {
 
 	private static void createAndShowGUI() {
 		JFrame frame = new MainFrame("kwoudMines");
-		frame.setSize(20*60, 15*60);
+		frame.setSize(20*40, 15*40);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

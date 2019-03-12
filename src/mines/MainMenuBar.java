@@ -1,10 +1,14 @@
 package mines;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class MainMenuBar extends JMenuBar {
+public class MainMenuBar extends JMenuBar implements ActionListener {
 	public MainMenuBar() {
 		// Create and add menus to menu bar
 		JMenu fileMenu = new JMenu("File");
@@ -18,6 +22,8 @@ public class MainMenuBar extends JMenuBar {
 		JMenuItem fileItemOpen = new JMenuItem("Open...");
 		JMenuItem fileItemSave = new JMenuItem("Save...");
 		JMenuItem fileItemExit = new JMenuItem("Exit");
+		fileItemExit.setActionCommand("exitprogramm");
+		fileItemExit.addActionListener(this);
 		fileMenu.add(fileItemOpen);
 		fileMenu.add(fileItemSave);
 		fileMenu.add(fileItemExit);
@@ -33,5 +39,21 @@ public class MainMenuBar extends JMenuBar {
 		// create and add menu items to help menu
 		JMenuItem helpItemAbout = new JMenuItem("About");
 		helpMenu.add(helpItemAbout);
+		helpItemAbout.setActionCommand("about");
+		helpItemAbout.addActionListener(this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if ("exitprogramm".equals(arg0.getActionCommand())) {
+			int dialogButton = JOptionPane.showConfirmDialog(null, "Really quit?", "Exit Warning", JOptionPane.YES_NO_OPTION);
+			if(dialogButton == JOptionPane.YES_OPTION) { 
+				System.exit(0);
+			}
+		}
+		if ("about".equals(arg0.getActionCommand())) {
+			JOptionPane.showMessageDialog(null, "This is kwoudMines version 0.0.x", "About kwoudMines", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 }
