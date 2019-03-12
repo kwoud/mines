@@ -47,7 +47,6 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		if ("exitprogramm".equals(arg0.getActionCommand())) {
 			int dialogButton = JOptionPane.showConfirmDialog(null, "Really quit?", "Exit Warning", JOptionPane.YES_NO_OPTION);
 			if(dialogButton == JOptionPane.YES_OPTION) { 

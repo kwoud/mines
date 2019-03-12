@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 public class StartWindow {
 
 	private static void createAndShowGUI() {
+		// initiate main frame
 		JFrame frame = new MainFrame("kwoudMines");
 		frame.setSize(20*40, 15*40);
 		frame.setResizable(false);
@@ -23,7 +24,6 @@ public class StartWindow {
 		
 		// show frame
 		frame.setVisible(true);
-		//JOptionPane.showMessageDialog(frame, "Welcome to kwoudMines!");
 	}
 	
 	public static void main(String[] args) {
