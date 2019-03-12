@@ -24,7 +24,11 @@ public class MainMenuBar extends JMenuBar {
 		
 		// create and add menu items to options menu
 		JMenuItem optionsItemSetSize = new JMenuItem("Set grid size...");
+		JMenuItem optionsItemDecreaseButtonSize = new JMenuItem("Decrease button size");
+		JMenuItem optionsItemIncreaseButtonSize = new JMenuItem("Increase button size");
 		optionsMenu.add(optionsItemSetSize);
+		optionsMenu.add(optionsItemDecreaseButtonSize);
+		optionsMenu.add(optionsItemIncreaseButtonSize);
 		
 		// create and add menu items to help menu
 		JMenuItem helpItemAbout = new JMenuItem("About");
