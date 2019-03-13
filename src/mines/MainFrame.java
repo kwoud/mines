@@ -1,6 +1,5 @@
 package mines;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
 
@@ -21,9 +20,9 @@ public class MainFrame extends JFrame {
 		// create Swing component
 		createButtons();
 		
-		// add Swing components to content pane
+		// save content pane in variable
 		c = getContentPane();
-
+		
 		// add components to container
 		addButtons();
 	}

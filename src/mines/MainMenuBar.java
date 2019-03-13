@@ -3,7 +3,6 @@ package mines;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 //leave out javax.swing.* to get to know the packages
 //import javax.swing.*;
 import javax.swing.JMenu;
