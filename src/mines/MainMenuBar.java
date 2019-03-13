@@ -3,6 +3,7 @@ package mines;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 //leave out javax.swing.* to get to know the packages
 //import javax.swing.*;
 import javax.swing.JMenu;
@@ -34,6 +35,10 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		JMenuItem optionsItemSetSize = new JMenuItem("Set grid size...");
 		JMenuItem optionsItemDecreaseButtonSize = new JMenuItem("Decrease button size");
 		JMenuItem optionsItemIncreaseButtonSize = new JMenuItem("Increase button size");
+		optionsItemDecreaseButtonSize.setActionCommand("decrease");
+		optionsItemDecreaseButtonSize.addActionListener(this);
+		optionsItemIncreaseButtonSize.setActionCommand("increase");
+		optionsItemIncreaseButtonSize.addActionListener(this);
 		optionsMenu.add(optionsItemSetSize);
 		optionsMenu.add(optionsItemDecreaseButtonSize);
 		optionsMenu.add(optionsItemIncreaseButtonSize);
@@ -55,6 +60,12 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		}
 		if ("about".equals(arg0.getActionCommand())) {
 			JOptionPane.showMessageDialog(null, "This is kwoudMines version 0.0.x", "About kwoudMines", JOptionPane.INFORMATION_MESSAGE);
+		}
+		if ("increase".equals(arg0.getActionCommand())) {
+			StartWindow.increaseSize();
+		}
+		if ("decrease".equals(arg0.getActionCommand())) {
+			StartWindow.decreaseSize();
 		}
 	}
 }
