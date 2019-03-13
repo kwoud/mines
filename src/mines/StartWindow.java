@@ -1,6 +1,7 @@
 package mines;
 
 import java.awt.Dimension;
+import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +13,7 @@ import javax.swing.SwingUtilities;
 
 
 public class StartWindow {
-	private static JFrame frame;
+	private static MainFrame frame;
 	private static int gridX;
 	private static int gridY;
 	private static int buttonSize;
@@ -21,12 +22,12 @@ public class StartWindow {
 	
 	private static void createAndShowGUI()  {
 		// initiate main frame
-		frame = new MainFrame("kwoudMines");
 		gridX=20;
 		gridY=15;
 		buttonSize=60;
 		incrSize=5;
-		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame = new MainFrame("kwoudMines", gridX, gridY);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+10);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -65,6 +66,18 @@ public class StartWindow {
 		buttonSize -= incrSize;
 		frame.setSize(gridX*buttonSize, gridY*buttonSize);
 		frame.revalidate();
+	}
+	
+	public static void setGridSize(int x, int y) {
+		gridX = x;
+		gridY = y;
+		frame.removeAll();
+		frame.setGridSize(gridX, gridY);
+		frame.createButtons();
+		frame.addButtons();
+		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame.revalidate();
+		frame.repaint();
 	}
 	
 	public static void main(String[] args) {

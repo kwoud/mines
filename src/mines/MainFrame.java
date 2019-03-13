@@ -8,30 +8,51 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
-	public MainFrame(String title) {
+	private JButton[] buttons;
+	private int gridX, gridY;
+	private Container c;
+	
+	public MainFrame(String title, int X, int Y) {
 		super(title);
 		
 		// set layout manager
-		setLayout(new GridLayout(15,20));
+		setGridSize(X,Y);
 		
 		// create Swing component
-		JButton[] buttons = new JButton[300];
-		for(int i=0; i<300; i++) {
-			buttons[i] = new JButton(Integer.toString(i));
-		}
+		createButtons();
 		
 		// add Swing components to content pane
-		Container c = getContentPane();
-		//JPanel panel = new JPanel();
-		
-		for(int i=0; i<300; i++) {
-			//panel.add(buttons[i]);
+		c = getContentPane();
+
+		// add components to container
+		addButtons();
+	}
+	
+	public void setLayout() {
+		this.setLayout(new GridLayout(gridY,gridX));
+	}
+	
+	public void setGridSize(int x, int y) {
+		gridX = x;
+		gridY = y;
+		setLayout(new GridLayout(gridY,gridX));
+	}
+	
+	public void removeAll() {
+		c.removeAll();
+	}
+	
+	public void createButtons() {
+		buttons = new JButton[gridX*gridY];
+		for(int i=0; i<gridX*gridY; i++) {
+			buttons[i] = new JButton(Integer.toString(i));
+		}
+	}
+	
+	public void addButtons() {
+		for(int i=0; i<gridX*gridY; i++) {
 			c.add(buttons[i]);
 		}
-		
-		//this.add(panel);
-		
-		//c.add(buttons, BorderLayout.NORTH);
 	}
 
 }
