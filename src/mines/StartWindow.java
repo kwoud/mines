@@ -13,13 +13,17 @@ public class StartWindow {
 	private static int buttonSize;
 	private static int incrSize;
 	
+	private static int _MENUSIZE_ = 50;
+	
 	
 	private static void createAndShowGUI()  {
-		// initiate main frame
-		gridX=20;
-		gridY=15;
+		// set private class variables to standard values
+		gridX=15;
+		gridY=10;
 		buttonSize=60;
 		incrSize=5;
+		
+		// initiate main frame and create buttons through <MainFrame> constructor
 		frame = new MainFrame("kwoudMines", gridX, gridY);
 		frame.setSize(gridX*buttonSize, gridY*buttonSize);
 		frame.setResizable(false);
@@ -27,28 +31,20 @@ public class StartWindow {
 		
 		// set menu bar
 		JMenuBar menuBar = new MainMenuBar();
-		menuBar.setPreferredSize(new Dimension(0, 25)); // x-value in Dimension doesn't do anything, why?
+		menuBar.setPreferredSize(new Dimension(0, _MENUSIZE_/2)); // x-value in Dimension doesn't do anything, why?
 		frame.setJMenuBar(menuBar);
 				
 		// show frame
 		frame.setVisible(true);
 	}
 	
-	 public static JFrame getFrame() {
-		return frame;
-	}
+	public static JFrame getFrame() {return frame;}
 	 
-	public static int getGridX() {
-		return gridX;
-	}
+	public static int getGridX() {return gridX;}
 	
-	public static int getGridY() {
-		return gridY;
-	}
+	public static int getGridY() {return gridY;}
 	
-	public static int getButtonSize() {
-		return buttonSize;
-	}
+	public static int getButtonSize() {return buttonSize;}
 	
 	public static void increaseSize() {
 		buttonSize += incrSize;
@@ -69,12 +65,14 @@ public class StartWindow {
 		frame.setGridSize(gridX, gridY);
 		frame.createButtons();
 		frame.addButtons();
-		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
 		frame.revalidate();
 		frame.repaint();
 	}
 	
 	public static void main(String[] args) {
+		// print out size of <int> just for fun
+		System.out.println(Integer.toString(Integer.MIN_VALUE) + ":" + Integer.toString(Integer.MAX_VALUE));
 		// schedule a job for the event dispatch thread
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

@@ -14,15 +14,15 @@ public class MainFrame extends JFrame {
 	public MainFrame(String title, int X, int Y) {
 		super(title);
 		
+		gridX = X;
+		gridY = Y;
+		
 		// set layout manager
-		setGridSize(X,Y);
-		
-		// create Swing component
+		setLayout();
+		// create Swing components
 		createButtons();
-		
 		// save content pane in variable
 		c = getContentPane();
-		
 		// add components to container
 		addButtons();
 	}
@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
 	public void setGridSize(int x, int y) {
 		gridX = x;
 		gridY = y;
-		setLayout(new GridLayout(gridY,gridX));
+		this.setLayout(new GridLayout(gridY,gridX));
 	}
 	
 	public void removeAll() {
