@@ -48,13 +48,13 @@ public class StartWindow {
 	
 	public static void increaseSize() {
 		buttonSize += incrSize;
-		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
 		frame.revalidate();
 	}
 	
 	public static void decreaseSize() {
 		buttonSize -= incrSize;
-		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
 		frame.revalidate();
 	}
 	
@@ -65,7 +65,7 @@ public class StartWindow {
 		frame.setGridSize(gridX, gridY);
 		frame.createButtons();
 		frame.addButtons();
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_); // find better way to deal with menu size; buttons are sometimes not squares
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
 		frame.revalidate();
 		frame.repaint();
 	}
