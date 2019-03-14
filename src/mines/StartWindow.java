@@ -13,7 +13,7 @@ public class StartWindow {
 	private static int buttonSize;
 	private static int incrSize;
 	
-	private static int _MENUSIZE_ = 50;
+	private static int _MENUSIZE_ = 50; 
 	
 	
 	private static void createAndShowGUI()  {
@@ -65,7 +65,7 @@ public class StartWindow {
 		frame.setGridSize(gridX, gridY);
 		frame.createButtons();
 		frame.addButtons();
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_); // find better way to deal with menu size; buttons are sometimes not squares
 		frame.revalidate();
 		frame.repaint();
 	}
