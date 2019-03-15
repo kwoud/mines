@@ -89,15 +89,18 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 			this.setResizable(false);
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // check close operation
 			
-			this.setLayout(new GridLayout(3,2));
+			this.setLayout(new GridLayout(4,2));
 			
 			JLabel xlabel = new JLabel("X:");
 			JLabel ylabel = new JLabel("Y:");
+			JLabel mlabel = new JLabel("Number of mines");
 			
-			SpinnerModel model1 = new SpinnerNumberModel(StartWindow.getGridX(), 1, 20, 1);
-			SpinnerModel model2 = new SpinnerNumberModel(StartWindow.getGridY(), 1, 20, 1);
-			JSpinner spinner1 = new JSpinner(model1);
-			JSpinner spinner2 = new JSpinner(model2);
+			SpinnerModel modelX = new SpinnerNumberModel(StartWindow.getGridX(), 1, 20, 1);
+			SpinnerModel modelY = new SpinnerNumberModel(StartWindow.getGridY(), 1, 20, 1);
+			SpinnerModel modelM = new SpinnerNumberModel(10,1, StartWindow.getGridX()*StartWindow.getGridY(), 1);
+			JSpinner spinnerX = new JSpinner(modelX);
+			JSpinner spinnerY = new JSpinner(modelY);
+			JSpinner spinnerM = new JSpinner(modelM);
 			
 			JButton okButton = new JButton("Set");
 			JButton cancelButton = new JButton("Close");
@@ -106,7 +109,8 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if ("setgrid".equals(e.getActionCommand())) {
-						StartWindow.setGridSize((Integer) spinner1.getValue(), (Integer) spinner2.getValue());
+						StartWindow.setGridSize((Integer) spinnerX.getValue(), (Integer) spinnerY.getValue());
+						StartWindow.setNumMines((Integer) spinnerM.getValue());
 					}
 				}
 			});
@@ -122,9 +126,11 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 			
 			Container c = getContentPane();
 			c.add(xlabel);
-			c.add(spinner1);
+			c.add(spinnerX);
 			c.add(ylabel);
-			c.add(spinner2);
+			c.add(spinnerY);
+			c.add(mlabel);
+			c.add(spinnerM);
 			c.add(okButton);
 			c.add(cancelButton);
 			

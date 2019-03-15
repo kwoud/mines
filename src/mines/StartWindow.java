@@ -10,6 +10,7 @@ public class StartWindow {
 	private static MainFrame frame;
 	private static int gridX;
 	private static int gridY;
+	private static int numMines;
 	private static int buttonSize;
 	private static int incrSize;
 	
@@ -20,6 +21,7 @@ public class StartWindow {
 		// set private class variables to standard values
 		gridX=15;
 		gridY=10;
+		numMines=10;
 		buttonSize=60;
 		incrSize=5;
 		
@@ -43,6 +45,8 @@ public class StartWindow {
 	public static int getGridX() {return gridX;}
 	
 	public static int getGridY() {return gridY;}
+	
+	public static void setNumMines(int num) {numMines=num;System.out.println(numMines);}
 	
 	public static int getButtonSize() {return buttonSize;}
 	
