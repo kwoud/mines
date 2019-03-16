@@ -2,15 +2,20 @@ package mines;
 
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements MouseListener {
 	private JButton[] buttons;
 	private int gridX, gridY;
 	private Container c;
+	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_16x16.png");
 	
 	public MainFrame(String title, int X, int Y) {
 		super(title);
@@ -43,18 +48,42 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void createButtons() {
-		ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud.png");
-		System.out.print(cloud.getDescription());
+		System.out.println(cloud.getDescription());
 		buttons = new JButton[gridX*gridY];
 		for(int i=0; i<gridX*gridY; i++) {
-			buttons[i] = new JButton(cloud);
+			buttons[i] = new JButton();
 		}
 	}
 	
 	public void addButtons() {
 		for(int i=0; i<gridX*gridY; i++) {
 			c.add(buttons[i]);
+			buttons[i].addMouseListener(this);
 		}
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			JButton currButton = (JButton) e.getSource();
+			if (currButton.getIcon() != null) {
+				currButton.setIcon(null);
+			} else {
+				currButton.setIcon(cloud);
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) { /* do nothing */ }
+
+	@Override
+	public void mouseExited(MouseEvent e) { /* do nothing */ }
+
+	@Override
+	public void mousePressed(MouseEvent e) { /* do nothing */ }
+
+	@Override
+	public void mouseReleased(MouseEvent e) { /* do nothing */ }
 
 }

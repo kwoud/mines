@@ -12,7 +12,7 @@ public class StartWindow {
 	private static int gridX = 15;
 	private static int gridY = 10;
 	private static int numMines = 30;
-	private static int buttonSize = 48;
+	private static int buttonSize = 24;
 	private static int incrSize = 5;
 	
 	private static int _MENUSIZE_ = 50; 
