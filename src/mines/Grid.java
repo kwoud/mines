@@ -1,6 +1,5 @@
 package mines;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Grid {
@@ -16,7 +15,7 @@ public class Grid {
 	}
 	
 	public Grid() {
-		gridArray = new int[gridSize];
+		gridArray = new int[StartWindow.getGridX() * StartWindow.getGridY()];
 	}
 	
 	public void setGridMines() {
@@ -30,34 +29,43 @@ public class Grid {
 	}
 	
 	private boolean inGrid(int i) {
-		if ((i < gridX) || (i > gridX) ||
-				(i < gridY) || (i > gridY)) {
+		if ((i < 0) || (i >= gridX) ||
+				(i < 0) || (i >= gridY)) {
 			return false;
 			}
+		else return true;
+	}
+	
+	private boolean isMine(int i) {
+		if (gridArray[i] == 9) {
 			return true;
+		}
+		else return false;
 	}
 	
 	public void setGridNumbers() {
 		for (int i = 0; i < gridSize; i++) {
 			int psblNeighbour;
-			//folgende Schleife läuft über die 3 über i liegenden Felder
-			for (psblNeighbour = i - gridX - 1; psblNeighbour == i - gridX + 1; psblNeighbour++) {
-				if (inGrid(psblNeighbour) && gridArray[psblNeighbour] == 9) {
+			if (gridArray[i] == 0) {
+				//folgende Schleife läuft über die 3 über i liegenden Felder
+				for (psblNeighbour = i - gridX - 1; psblNeighbour == i - gridX + 1; psblNeighbour++) {
+					if (inGrid(psblNeighbour) && isMine(psblNeighbour)) {
+						gridArray[i]++;
+					}
+				}
+				//linker Nachbar
+				if (inGrid(i - 1) && isMine(i - 1)) {
 					gridArray[i]++;
 				}
-			}
-			//linker Nachbar
-			if (inGrid(i - 1) && gridArray[i - 1] == 9) {
-				gridArray[i]++;
-			}
-			//rechter Nachbar
-			if (inGrid(i + 1) && gridArray[i + 1] == 9) {
-				gridArray[i]++;
-			}
-			//folgende Schleife läuft über die 3 unter i liegenden Felder
-			for (psblNeighbour = i + gridX - 1; psblNeighbour == i + gridX + 1; psblNeighbour++) {
-				if (inGrid(psblNeighbour) && gridArray[psblNeighbour] == 9) {
+				//rechter Nachbar
+				if (inGrid(i + 1) && isMine(i + 1)) {
 					gridArray[i]++;
+				}
+				//folgende Schleife läuft über die 3 unter i liegenden Felder
+				for (psblNeighbour = i + gridX - 1; psblNeighbour == i + gridX + 1; psblNeighbour++) {
+					if (inGrid(psblNeighbour) && isMine(psblNeighbour)) {
+						gridArray[i]++;
+					}
 				}
 			}
 		}

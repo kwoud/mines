@@ -7,10 +7,14 @@ public class GridTest {
 	@Test
 	public void testGrid() {
 		Grid testGrid = new Grid();
-		for (int i =  0; i < StartWindow.getGridX() * StartWindow.getGridY(); i++) {
-			System.out.print("| " + testGrid.getGrid()[i] + " ");
+		testGrid.setGridMines();
+		testGrid.setGridNumbers();
+		for (int i =  0; i < StartWindow.getGridX(); i++) {
+			for (int j = 0; j < StartWindow.getGridY(); j++) {
+				System.out.print("| " + testGrid.getGrid()[i + (j * StartWindow.getGridX())] + " ");
+			}
+			System.out.println("|");
 		}
-		System.out.print("|");
 	}
 			
 //      for (int i = 0; i < gridArray.length; i++) {

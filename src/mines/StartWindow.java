@@ -8,9 +8,9 @@ import javax.swing.SwingUtilities;
 
 public class StartWindow {
 	private static MainFrame frame;
-	private static int gridX;
-	private static int gridY;
-	private static int numMines;
+	private static int gridX = 15;
+	private static int gridY = 10;
+	private static int numMines = 10;
 	private static int buttonSize;
 	private static int incrSize;
 	
