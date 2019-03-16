@@ -15,7 +15,7 @@ public class Grid {
 	}
 	
 	public Grid() {
-		gridArray = new int[StartWindow.getGridX() * StartWindow.getGridY()];
+		gridArray = new int[gridSize];
 	}
 	
 	public void setGridMines() {
@@ -28,105 +28,45 @@ public class Grid {
 		while (--mineCount > 0);
 	}
 	
-	private boolean inGrid(int i) {
+	private boolean inGrid(int i, int j) {
 		if ((i < 0) || (i >= gridX) ||
-				(i < 0) || (i >= gridY)) {
+				(j < 0) || (j >= gridY)) {
 			return false;
 			}
 		else return true;
 	}
 	
-	private boolean isMine(int i) {
-		if (gridArray[i] == 9) {
+	private boolean isMine(int i, int j) {
+		if (gridArray[(i * gridX) + j] == 9) {
 			return true;
 		}
 		else return false;
 	}
 	
+	public int[][] psblNeighbour(int i, int j) {
+//		int[] neighbourArray = {gridArray[((i - 1) * gridX) + j - 1, ((i - 1) * gridX) + j, ((i - 1) * gridX) + j + 1,
+//		                                  (i * gridX) + j - 1, (i * gridX) + j + 1,
+//		                                  ((i + 1) * gridX) + j - 1, ((i + 1) * gridX) + j, ((i + 1) * gridX) + j + 1};
+		int[][] neighbourArray = new int[][] {	{i - 1, j - 1}, {i - 1, j}, {i - 1, j + 1}, 
+												{i, j - 1}, 				{i, j + 1},
+												{i + 1, j - 1}, {i + 1, j}, {i + 1, j + 1}	}; 
+		return neighbourArray;
+	}
+	
 	public void setGridNumbers() {
-		for (int i = 0; i < gridSize; i++) {
-			int psblNeighbour;
-			if (gridArray[i] == 0) {
-				//folgende Schleife läuft über die 3 über i liegenden Felder
-				for (psblNeighbour = i - gridX - 1; psblNeighbour == i - gridX + 1; psblNeighbour++) {
-					if (inGrid(psblNeighbour) && isMine(psblNeighbour)) {
-						gridArray[i]++;
-					}
-				}
-				//linker Nachbar
-				if (inGrid(i - 1) && isMine(i - 1)) {
-					gridArray[i]++;
-				}
-				//rechter Nachbar
-				if (inGrid(i + 1) && isMine(i + 1)) {
-					gridArray[i]++;
-				}
-				//folgende Schleife läuft über die 3 unter i liegenden Felder
-				for (psblNeighbour = i + gridX - 1; psblNeighbour == i + gridX + 1; psblNeighbour++) {
-					if (inGrid(psblNeighbour) && isMine(psblNeighbour)) {
-						gridArray[i]++;
+		for (int i = 0; i < gridY; i++) {
+			for (int j = 0; j < gridX; j++) {
+				if (gridArray[(i * gridX) + j] == 0) {
+					for (int neighbour = 0; neighbour < 8; neighbour++) {
+						if (inGrid(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
+							if (isMine(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
+								gridArray[(i * gridX) + j]++;							
+							}
+						}
 					}
 				}
 			}
 		}
-	
-			
-//		for (int i = 0; i < size; i++) {
-//			for (int x = i - gridX - 1)
-//			if (inGrid(i) && gridArray[i] == 9) {
-//				gridArray[i + 1]++;
-//			}
-//		}	
-		
 	}
 	
 }
-	
-//    public static void main(String[] args) {
-//    
-//        char[][] gridArray = new char[10][10];
-//
-//        for (char[] row : gridArray) {
-//            Arrays.fill(row, ' ');
-//        }
-//        
-//        int mineCount = 10;
-//        Random rand = new Random();
-//        
-//        if (mineCount >= 10 * 10) {
-//            System.out.println("Es muss weniger Minen geben als Felder im Grid!");
-//        }
-//        else {
-//            do {
-//                int randi = rand.nextInt(10);
-//                int randj = rand.nextInt(10);
-//                if (gridArray[randi][randj] == ' ') {
-//                    gridArray[randi][randj] = '*';
-//                    mineCount--;
-//                }
-//            }
-//            while (mineCount > 0);
-//
-//            for (int i = 0; i < gridArray.length; i++) {
-//                for (int j = 0; j < gridArray[i].length; j++) {
-//                    int surroundingMines = 0;
-//                    if (gridArray[i][j] == ' ') {
-//                        for (int x = i - 1; x > i; x++) {
-//                            for (int y = i - 1; y > i; y++) {
-//                                if (gridArray[x][y] == '*') {
-//                                    surroundingMines++;
-//                                }
-//                            }
-//                        }
-//                        if (surroundingMines != 0) {
-//                            gridArray[i][j] = (char)(surroundingMines + '0');
-//                        }
-//                    }    
-//                    System.out.print("| " + gridArray[i][j] + " ");
-//                }
-//                System.out.println("|");
-//            }
-//        }
-//    }
-//
-//}
