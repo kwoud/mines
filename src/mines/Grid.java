@@ -6,23 +6,70 @@ import java.util.Random;
 public class Grid {
 
 	private int[] gridArray;
+	int gridX = StartWindow.getGridX();
+	int gridY = StartWindow.getGridY();
+	int gridSize = gridX * gridY;
+	int numMines = StartWindow.getNumMines();
 	
 	public int[] getGrid() {
 		return gridArray;
 	}
 	
 	public Grid() {
-		gridArray = new int[StartWindow.getGridX() * StartWindow.getGridY()];
+		gridArray = new int[gridSize];
 	}
 	
-	public void setGrid() {
+	public void setGridMines() {
 		Random rand = new Random();
-		int mineCount = StartWindow.getNumMines();
+		int mineCount = numMines;
 		do {
-			int randPos = rand.nextInt(StartWindow.getGridX() * StartWindow.getGridY());
+			int randPos = rand.nextInt(gridSize);
 			if (gridArray[randPos] == 0) gridArray[randPos] = 9; // 9 steht für eine Mine
 		}
 		while (--mineCount > 0);
+	}
+	
+	private boolean inGrid(int i) {
+		if ((i < gridX) || (i > gridX) ||
+				(i < gridY) || (i > gridY)) {
+			return false;
+			}
+			return true;
+	}
+	
+	public void setGridNumbers() {
+		for (int i = 0; i < gridSize; i++) {
+			int psblNeighbour;
+			//folgende Schleife läuft über die 3 über i liegenden Felder
+			for (psblNeighbour = i - gridX - 1; psblNeighbour == i - gridX + 1; psblNeighbour++) {
+				if (inGrid(psblNeighbour) && gridArray[psblNeighbour] == 9) {
+					gridArray[i]++;
+				}
+			}
+			//linker Nachbar
+			if (inGrid(i - 1) && gridArray[i - 1] == 9) {
+				gridArray[i]++;
+			}
+			//rechter Nachbar
+			if (inGrid(i + 1) && gridArray[i + 1] == 9) {
+				gridArray[i]++;
+			}
+			//folgende Schleife läuft über die 3 unter i liegenden Felder
+			for (psblNeighbour = i + gridX - 1; psblNeighbour == i + gridX + 1; psblNeighbour++) {
+				if (inGrid(psblNeighbour) && gridArray[psblNeighbour] == 9) {
+					gridArray[i]++;
+				}
+			}
+		}
+	
+			
+//		for (int i = 0; i < size; i++) {
+//			for (int x = i - gridX - 1)
+//			if (inGrid(i) && gridArray[i] == 9) {
+//				gridArray[i + 1]++;
+//			}
+//		}	
+		
 	}
 	
 }
