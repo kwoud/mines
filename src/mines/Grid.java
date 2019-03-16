@@ -40,42 +40,37 @@ public class Grid {
 		}
 	}
 	
-	private boolean inGrid(int i, int j) {
-		if ((i < 0) || (i >= gridX) ||
-				(j < 0) || (j >= gridY)) {
+	private boolean inGrid(int x, int y) {
+		if ((x < 0) || (x >= gridX) ||
+				(y < 0) || (y >= gridY)) {
 			return false;
 			}
 		else return true;
 	}
 	
-	private boolean isMine(int i, int j) {
-		if (gridArray[(j * gridX) + i] == 9) {
+	private boolean isMine(int x, int y) {
+		if (gridArray[x +(y * gridX)] == 9) {
 			return true;
 		}
 		else return false;
 	}
 	
-	public int[][] psblNeighbour(int i, int j) {
-//		int[] neighbourArray = {gridArray[((i - 1) * gridX) + j - 1, ((i - 1) * gridX) + j, ((i - 1) * gridX) + j + 1,
-//		                                  (i * gridX) + j - 1, (i * gridX) + j + 1,
-//		                                  ((i + 1) * gridX) + j - 1, ((i + 1) * gridX) + j, ((i + 1) * gridX) + j + 1};
-		int[][] neighbourArray = new int[][] {	{i - 1, j - 1}, {i, j - 1}, {i + 1, j - 1}, 
-												{i - 1 , j}, 				{i + 1, j},
-												{i - 1, j + 1}, {i, j + 1}, {i + 1, j + 1}	}; 
+	public static int[][] getNeighbour(int x, int y) {
+		int[][] neighbourArray = new int[][] {	{x - 1, y - 1}, {x, y - 1}, {x + 1, y - 1}, 
+												{x - 1 , y}, 				{x + 1, y},
+												{x - 1, y + 1}, {x, y + 1}, {x + 1, y + 1}	}; 
 		return neighbourArray;
 	}
 	
 	public void setGridNumbers() {
 		for (int j = 0; j < gridY; j++) {
 			for (int i = 0; i < gridX; i++) {
-				if (gridArray[(j * gridX) + i] == 0) {
+				if (gridArray[i + (j * gridX)] == 0) {
 					for (int neighbour = 0; neighbour < 8; neighbour++) {
-						int currX = psblNeighbour(i, j)[neighbour][0];
-						int currY = psblNeighbour(i, j)[neighbour][1];
-						if (inGrid(currX, currY)) {
-							if (isMine(currX, currY)) {
-								gridArray[(j * gridX) + i]++;							
-							}
+						int currX = getNeighbour(i, j)[neighbour][0];
+						int currY = getNeighbour(i, j)[neighbour][1];
+						if ( (inGrid(currX, currY)) && (isMine(currX, currY))) {
+								gridArray[i + (j * gridX)]++;
 						}
 					}
 				}
