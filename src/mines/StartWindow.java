@@ -48,6 +48,8 @@ public class StartWindow {
 	
 	public static void setNumMines(int num) {numMines=num;}
 	
+	public static int getNumMines() {return numMines;}
+	
 	public static int getButtonSize() {return buttonSize;}
 	
 	public static void increaseSize() {
