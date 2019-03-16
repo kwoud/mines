@@ -10,9 +10,9 @@ public class StartWindow {
 	private static MainFrame frame;
 	// set private class variables to standard values
 	private static int gridX = 15;
-	private static int gridY = 20;
+	private static int gridY = 10;
 	private static int numMines = 30;
-	private static int buttonSize = 60;
+	private static int buttonSize = 24;
 	private static int incrSize = 5;
 	
 	private static int _MENUSIZE_ = 50; 
@@ -75,6 +75,7 @@ public class StartWindow {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(System.getProperty("user.dir"));
 		// print out size of <int> just for fun
 		System.out.println(Integer.toString(Integer.MIN_VALUE) + ":" + Integer.toString(Integer.MAX_VALUE));
 		// schedule a job for the event dispatch thread
