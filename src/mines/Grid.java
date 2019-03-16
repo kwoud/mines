@@ -23,8 +23,9 @@ public class Grid {
 	}
 	
 	public String toString(int pos) {
-		if (gridArray[pos] == 9) { return "-"; }
-		else {return Integer.toString(gridArray[pos]);}
+		if (gridArray[pos] == 9) { return "*"; }
+		if (gridArray[pos] == 0) { return " "; }
+		return Integer.toString(gridArray[pos]);
 	}
 	
 	public void setGridMines() {
