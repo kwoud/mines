@@ -56,20 +56,22 @@ public class Grid {
 //		int[] neighbourArray = {gridArray[((i - 1) * gridX) + j - 1, ((i - 1) * gridX) + j, ((i - 1) * gridX) + j + 1,
 //		                                  (i * gridX) + j - 1, (i * gridX) + j + 1,
 //		                                  ((i + 1) * gridX) + j - 1, ((i + 1) * gridX) + j, ((i + 1) * gridX) + j + 1};
-		int[][] neighbourArray = new int[][] {	{i - 1, j - 1}, {i - 1, j}, {i - 1, j + 1}, 
-												{i, j - 1}, 				{i, j + 1},
-												{i + 1, j - 1}, {i + 1, j}, {i + 1, j + 1}	}; 
+		int[][] neighbourArray = new int[][] {	{i - 1, j - 1}, {i, j - 1}, {i + 1, j - 1}, 
+												{i - 1 , j}, 				{i + 1, j},
+												{i - 1, j + 1}, {i, j + 1}, {i + 1, j + 1}	}; 
 		return neighbourArray;
 	}
 	
 	public void setGridNumbers() {
-		for (int i = 0; i < gridY; i++) {
-			for (int j = 0; j < gridX; j++) {
-				if (gridArray[(i * gridX) + j] == 0) {
+		for (int j = 0; j < gridY; j++) {
+			for (int i = 0; i < gridX; i++) {
+				if (gridArray[(j * gridX) + i] == 0) {
 					for (int neighbour = 0; neighbour < 8; neighbour++) {
-						if (inGrid(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
-							if (isMine(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
-								gridArray[(i * gridX) + j]++;							
+						int currX = psblNeighbour(i, j)[neighbour][0];
+						int currY = psblNeighbour(i, j)[neighbour][1];
+						if (inGrid(currX, currY)) {
+							if (isMine(currX, currY)) {
+								gridArray[(j * gridX) + i]++;							
 							}
 						}
 					}
