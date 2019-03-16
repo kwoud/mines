@@ -46,7 +46,7 @@ public class Grid {
 	}
 	
 	private boolean isMine(int i, int j) {
-		if (gridArray[(i * gridX) + j] == 9) {
+		if (gridArray[(j * gridX) + i] == 9) {
 			return true;
 		}
 		else return false;
@@ -68,7 +68,7 @@ public class Grid {
 				if (gridArray[(i * gridX) + j] == 0) {
 					for (int neighbour = 0; neighbour < 8; neighbour++) {
 						if (inGrid(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
-							if (isMine(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
+							if (!isMine(psblNeighbour(i, j)[neighbour][0], psblNeighbour(i, j)[neighbour][1])) {
 								gridArray[(i * gridX) + j]++;							
 							}
 						}
