@@ -10,12 +10,21 @@ public class Grid {
 	int gridSize = gridX * gridY;
 	int numMines = StartWindow.getNumMines();
 	
+	public Grid() {
+		gridArray = new int[gridSize];
+	}
+
 	public int[] getGrid() {
 		return gridArray;
 	}
 	
-	public Grid() {
-		gridArray = new int[gridSize];
+	public int getValue(int pos) {
+		return gridArray[pos];
+	}
+	
+	public String toString(int pos) {
+		if (gridArray[pos] == 9) { return "-"; }
+		else {return Integer.toString(gridArray[pos]);}
 	}
 	
 	public void setGridMines() {
