@@ -3,6 +3,7 @@ package mines;
 import java.awt.Container;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -42,9 +43,11 @@ public class MainFrame extends JFrame {
 	}
 	
 	public void createButtons() {
+		ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud.png");
+		System.out.print(cloud.getDescription());
 		buttons = new JButton[gridX*gridY];
 		for(int i=0; i<gridX*gridY; i++) {
-			buttons[i] = new JButton(Integer.toString(i));
+			buttons[i] = new JButton(cloud);
 		}
 	}
 	
