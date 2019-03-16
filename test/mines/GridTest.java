@@ -6,8 +6,8 @@ public class GridTest {
 	
 	@Test
 	public void testGrid() {
-		Grid testGrid = new Grid(10, 5, 10);
-		for (int i =  0; i < testGrid.getParameters()[2]; i++) {
+		Grid testGrid = new Grid();
+		for (int i =  0; i < StartWindow.getGridX() * StartWindow.getGridY(); i++) {
 			System.out.print("| " + testGrid.getGrid()[i] + " ");
 		}
 		System.out.print("|");

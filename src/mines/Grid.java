@@ -4,40 +4,22 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Grid {
-	
-	private int gridX, gridY, mineCount;
+
 	private int[] gridArray;
-	
-	public int[] getParameters() {
-		int[] Array = new int[3];
-		Array[0] = gridX;
-		Array[1] = gridY;
-		Array[2] = gridX * gridY;
-		return Array;
-	}
 	
 	public int[] getGrid() {
 		return gridArray;
 	}
 	
-	public Grid(int mines, int x, int y) {
-		mineCount = mines;
-		gridX = x;
-		gridY = y;
-		gridArray = new int[x * y];
-//		clearGrid();
-	}
-    
-	private void clearGrid() {
-		for (int i = 0; i < gridX * gridY; i++) {
-			gridArray[i] = 0;
-		}
+	public Grid() {
+		gridArray = new int[StartWindow.getGridX() * StartWindow.getGridY()];
 	}
 	
 	public void setGrid() {
 		Random rand = new Random();
+		int mineCount = StartWindow.getNumMines();
 		do {
-			int randPos = rand.nextInt(gridX * gridY);
+			int randPos = rand.nextInt(StartWindow.getGridX() * StartWindow.getGridY());
 			if (gridArray[randPos] == 0) gridArray[randPos] = 9; // 9 steht für eine Mine
 		}
 		while (--mineCount > 0);
