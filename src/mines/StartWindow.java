@@ -27,7 +27,7 @@ public class StartWindow {
 		
 		// initiate main frame and create buttons through <MainFrame> constructor
 		frame = new MainFrame("kwoudMines", gridX, gridY);
-		frame.setSize(gridX*buttonSize, gridY*buttonSize);
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -46,7 +46,7 @@ public class StartWindow {
 	
 	public static int getGridY() {return gridY;}
 	
-	public static void setNumMines(int num) {numMines=num;System.out.println(numMines);}
+	public static void setNumMines(int num) {numMines=num;}
 	
 	public static int getButtonSize() {return buttonSize;}
 	
