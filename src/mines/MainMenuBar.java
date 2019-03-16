@@ -85,11 +85,11 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 	private class SetSizeFrame extends JFrame {
 		public SetSizeFrame(String title) {
 			super(title);
-			this.setSize(500,200);
+			this.setSize(300,200);
 			this.setResizable(false);
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // check close operation
 			
-			this.setLayout(new GridLayout(4,2));
+			this.setLayout(new GridLayout(4,2,10,10));
 			
 			JLabel xlabel = new JLabel("X:");
 			JLabel ylabel = new JLabel("Y:");

@@ -27,7 +27,7 @@ public class StartWindow {
 		
 		// initiate main frame and create buttons through <MainFrame> constructor
 		frame = new MainFrame("kwoudMines", gridX, gridY);
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
+		setSize();
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -52,15 +52,19 @@ public class StartWindow {
 	
 	public static int getButtonSize() {return buttonSize;}
 	
+	public static void setSize() {
+		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
+	}
+	
 	public static void increaseSize() {
 		buttonSize += incrSize;
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
+		setSize();
 		frame.revalidate();
 	}
 	
 	public static void decreaseSize() {
 		buttonSize -= incrSize;
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
+		setSize();
 		frame.revalidate();
 	}
 	
@@ -71,7 +75,7 @@ public class StartWindow {
 		frame.setGridSize(gridX, gridY);
 		frame.createButtons();
 		frame.addButtons();
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
+		setSize(); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
 		frame.revalidate();
 		frame.repaint();
 	}
