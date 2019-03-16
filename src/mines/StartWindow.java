@@ -8,23 +8,17 @@ import javax.swing.SwingUtilities;
 
 public class StartWindow {
 	private static MainFrame frame;
+	// set private class variables to standard values
 	private static int gridX = 15;
-	private static int gridY = 10;
-	private static int numMines = 10;
-	private static int buttonSize;
-	private static int incrSize;
+	private static int gridY = 20;
+	private static int numMines = 30;
+	private static int buttonSize = 60;
+	private static int incrSize = 5;
 	
 	private static int _MENUSIZE_ = 50; 
 	
 	
-	private static void createAndShowGUI()  {
-		// set private class variables to standard values
-		gridX=15;
-		gridY=10;
-		numMines=10;
-		buttonSize=60;
-		incrSize=5;
-		
+	private static void createAndShowGUI()  {		
 		// initiate main frame and create buttons through <MainFrame> constructor
 		frame = new MainFrame("kwoudMines", gridX, gridY);
 		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);

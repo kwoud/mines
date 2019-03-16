@@ -31,11 +31,13 @@ public class Grid {
 	public void setGridMines() {
 		Random rand = new Random();
 		int mineCount = numMines;
-		do {
+		while (mineCount > 0) {
 			int randPos = rand.nextInt(gridSize);
-			if (gridArray[randPos] == 0) gridArray[randPos] = 9; // 9 steht für eine Mine
+			if (gridArray[randPos] == 0) {
+				gridArray[randPos] = 9; // 9 steht für eine Mine
+				mineCount--;
+			}	
 		}
-		while (--mineCount > 0);
 	}
 	
 	private boolean inGrid(int i, int j) {
