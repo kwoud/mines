@@ -10,9 +10,9 @@ public class GridTest {
 		testGrid.setGridMines();
 		testGrid.setGridNumbers();
 		int currPos = 0;
-		for (int i =  0; i < StartWindow.getGridY(); i++) {
-			for (int j = 0; j < StartWindow.getGridX(); j++) {
-				currPos = (i * StartWindow.getGridX()) + j;
+		for (int j =  0; j < StartWindow.getGridY(); j++) {
+			for (int i = 0; i < StartWindow.getGridX(); i++) {
+				currPos = (j * StartWindow.getGridX()) + i;
 				System.out.print("| " + testGrid.toString(currPos) + " ");
 			}
 			System.out.println("|");
