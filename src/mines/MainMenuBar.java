@@ -85,11 +85,11 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 	private class SetSizeFrame extends JFrame {
 		public SetSizeFrame(String title) {
 			super(title);
-			this.setSize(500,200);
+			this.setSize(400,200);
 			this.setResizable(false);
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // check close operation
 			
-			this.setLayout(new GridLayout(4,2));
+			this.setLayout(new GridLayout(4,2, 5, 5));
 			
 			JLabel xlabel = new JLabel("X:");
 			JLabel ylabel = new JLabel("Y:");
@@ -104,25 +104,13 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 			
 			JButton okButton = new JButton("Set");
 			JButton cancelButton = new JButton("Close");
-			okButton.setActionCommand("setgrid");
-			okButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if ("setgrid".equals(e.getActionCommand())) {
-						StartWindow.setGridSize((Integer) spinnerX.getValue(), (Integer) spinnerY.getValue());
-						StartWindow.setNumMines((Integer) spinnerM.getValue());
-					}
-				}
+			okButton.addActionListener(e -> {
+					StartWindow.setGridSize(
+							(Integer) spinnerX.getValue(), 
+							(Integer) spinnerY.getValue(),
+							(Integer) spinnerM.getValue());
 			});
-			cancelButton.setActionCommand("close");
-			cancelButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					if ("close".equals(e.getActionCommand())) {
-						dispose();
-					}
-				}
-			});
+			cancelButton.addActionListener(e -> dispose());
 			
 			Container c = getContentPane();
 			c.add(xlabel);

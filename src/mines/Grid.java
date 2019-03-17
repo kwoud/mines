@@ -12,7 +12,19 @@ public class Grid {
 	public Grid() {
 		gridArray = new int[gridSize];
 	}
+	
+	public void newGrid() {
+		gridArray = new int[gridSize];
+	}
 
+	public void newGrid(int x, int y, int m) {
+		setGridSize(x, y);
+		setNumMines(m);
+		gridArray = new int[gridSize];
+		setGridMines();
+		setGridNumbers();
+	}
+	
 	public int[] getGrid() {
 		return gridArray;
 	}

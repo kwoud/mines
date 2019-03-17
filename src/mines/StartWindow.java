@@ -13,20 +13,22 @@ public class StartWindow {
 	private static int buttonSize = 24;
 	private static int incrSize = 5;
 	
-	private static final int _MENUSIZE_ = 50; 
+	private static final int MENU_SIZE = 50; 
 	
 	
 	private static void createAndShowGUI()  {		
 		// initiate main frame and create buttons through <MainFrame> constructor
 		grid = new Grid();
-		frame = new MainFrame("kwoudMines", grid.getGridX(), grid.getGridY());
+		grid.setGridMines();
+		grid.setGridNumbers();
+		frame = new MainFrame("kwoudMines", grid);
 		setFrameSize();
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// set menu bar
 		JMenuBar menuBar = new MainMenuBar();
-		menuBar.setPreferredSize(new Dimension(0, _MENUSIZE_/2)); // x-value in Dimension doesn't do anything, why?
+		menuBar.setPreferredSize(new Dimension(0, MENU_SIZE/2)); // x-value in Dimension doesn't do anything, why?
 		frame.setJMenuBar(menuBar);
 				
 		// show frame
@@ -45,9 +47,13 @@ public class StartWindow {
 	
 	public static int getButtonSize() {return buttonSize;}
 	
+	public static int getValue(int pos) {return grid.getValue(pos);}
+	
 	public static void setFrameSize() {
-		frame.setSize(grid.getGridX()*buttonSize, grid.getGridY()*buttonSize+_MENUSIZE_); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
+		frame.setSize(grid.getGridX()*buttonSize, grid.getGridY()*buttonSize+MENU_SIZE); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
 	}
+	
+	public static int getMenuSize() {return MENU_SIZE;}
 	
 	public static void increaseSize() {
 		buttonSize += incrSize;
@@ -61,15 +67,9 @@ public class StartWindow {
 		frame.revalidate();
 	}
 	
-	public static void setGridSize(int x, int y) {
-		grid.setGridSize(x, y);
-		frame.removeAll();
-		frame.setGridSize(grid.getGridX(), grid.getGridY());
-		frame.createButtons();
-		frame.addButtons();
-		setFrameSize();
-		frame.revalidate();
-		frame.repaint();
+	public static void setGridSize(int x, int y, int m) {
+		grid.newGrid(x, y, m);
+		frame.reframe();
 	}
 	
 	public static void main(String[] args) {
