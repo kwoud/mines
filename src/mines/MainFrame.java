@@ -71,21 +71,14 @@ public class MainFrame extends JFrame implements MouseListener {
 			c.add(buttons[i]);
 		}
 	}
-	
-	private String getString(JButton btn) {
-		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
-		if (val == 9) return "*";
-		if (val == 0) return "";
-		return Integer.toString(val);
-	}
-	
+		
 	public void reveal() {
 		for (int i = 0; i < grid.getGridSize(); i++) {
 			if(buttons[i].isContentAreaFilled()) {
 				buttons[i].setBackground(Color.GRAY);
 			}
 			else {
-				if (isNumber(buttons[i]) && isFlagged(buttons[i])) {
+				if (!isMine(buttons[i]) && isFlagged(buttons[i])) {
 					buttons[i].setContentAreaFilled(true);
 					buttons[i].setBackground(Color.GRAY);
 				}
@@ -98,12 +91,6 @@ public class MainFrame extends JFrame implements MouseListener {
 	private boolean isMine(JButton btn) {
 		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
 		if (val==9) return true;
-		return false;
-	}
-	
-	private boolean isNumber(JButton btn) {
-		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
-		if (val!=9) return true;
 		return false;
 	}
 	
