@@ -19,6 +19,7 @@ public class MainFrame extends JFrame implements MouseListener {
 	private Container c;
 	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_24x24.png");
 	ImageIcon bolt  = new ImageIcon("./src/mines/icon/bolt_24x24.png");
+	Color[] colours = new Color[] {Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK, Color.RED, Color.DARK_GRAY, Color.BLACK};
 
 	
 	public MainFrame(String title, Grid backend) {
@@ -79,29 +80,76 @@ public class MainFrame extends JFrame implements MouseListener {
 	}
 	
 	public void reveal() {
-		for (int i = 0; i < grid.getGridX() * grid.getGridY(); i++) {
-			buttons[i].setContentAreaFilled(false);
-			buttons[i].setText(getString(buttons[i]));
+		for (int i = 0; i < grid.getGridSize(); i++) {
+			if(buttons[i].isContentAreaFilled()) {
+				buttons[i].setBackground(Color.GRAY);
+			}
+			else {
+				if (isNumber(buttons[i]) && isFlagged(buttons[i])) {
+					buttons[i].setContentAreaFilled(true);
+					buttons[i].setBackground(Color.GRAY);
+				}
+			}
+			showState(buttons[i]);
+			buttons[i].removeMouseListener(this);
 		}
 	}
 
+	private boolean isMine(JButton btn) {
+		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
+		if (val==9) return true;
+		return false;
+	}
+	
+	private boolean isNumber(JButton btn) {
+		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
+		if (val!=9) return true;
+		return false;
+	}
+	
+	private boolean isFlagged(JButton btn) {
+		if (btn.getIcon() == cloud) return true;
+		return false;
+	}
+	
+	private void showState(JButton btn) {
+		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
+		if (val == 9) {
+			if (!isFlagged(btn)) btn.setIcon(bolt);
+		}
+		else if (val == 0) {
+			btn.setIcon(null);
+			btn.setText("");
+		}
+		else {
+			btn.setIcon(null);
+			btn.setText(Integer.toString(val));
+			btn.setForeground(colours[val-1]); 
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JButton currButton = (JButton) e.getSource();
 		if (e.getButton() == MouseEvent.BUTTON3) {
-			if (currButton.isContentAreaFilled()) {
-				if (currButton.getIcon() != null) {
+				if (isFlagged(currButton)) { // flag button
 					currButton.setIcon(null);
-				} else {
+					currButton.setContentAreaFilled(true);
+				} else { // unflag button
 					currButton.setIcon(cloud);
+					currButton.setContentAreaFilled(false);
 				}
-			}
 		}
 		if (e.getButton() == MouseEvent.BUTTON1) {
-			if (currButton.getIcon() == null) {
+			if (!isFlagged(currButton)) {
 				currButton.setContentAreaFilled(false);
 				System.out.println(Arrays.asList(buttons).indexOf(currButton));
-				currButton.setText(getString(currButton));
+				if (isMine(currButton)) {
+					reveal();
+					currButton.setContentAreaFilled(true);
+					currButton.setBackground(Color.RED);
+				}
+				else showState(currButton);
 			}
 		}
 	}
