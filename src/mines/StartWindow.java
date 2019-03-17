@@ -72,6 +72,10 @@ public class StartWindow {
 		frame.reframe();
 	}
 	
+	public static void reveal() {
+		frame.reveal();
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(System.getProperty("user.dir"));
 		// print out size of <int> just for fun

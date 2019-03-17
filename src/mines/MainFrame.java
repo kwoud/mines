@@ -90,6 +90,13 @@ public class MainFrame extends JFrame implements MouseListener {
 		if (val == 0) return "";
 		return Integer.toString(val);
 	}
+	
+	public void reveal() {
+		for (int i = 0; i < grid.getGridX() * grid.getGridY(); i++) {
+			buttons[i].setContentAreaFilled(false);
+			buttons[i].setText(getString(buttons[i]));
+		}
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

@@ -40,15 +40,19 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		fileMenu.add(fileItemExit);
 		
 		// create and add menu items to options menu
+		JMenuItem optionsItemReveal = new JMenuItem("Reveal");
 		JMenuItem optionsItemSetSize = new JMenuItem("Set grid size...");
 		JMenuItem optionsItemDecreaseButtonSize = new JMenuItem("Decrease button size");
 		JMenuItem optionsItemIncreaseButtonSize = new JMenuItem("Increase button size");
+		optionsItemReveal.setActionCommand("reveal");
 		optionsItemSetSize.setActionCommand("setsizewindow");
 		optionsItemDecreaseButtonSize.setActionCommand("decrease");
 		optionsItemIncreaseButtonSize.setActionCommand("increase");
+		optionsItemReveal.addActionListener(this);
 		optionsItemSetSize.addActionListener(this);
 		optionsItemDecreaseButtonSize.addActionListener(this);
 		optionsItemIncreaseButtonSize.addActionListener(this);
+		optionsMenu.add(optionsItemReveal);
 		optionsMenu.add(optionsItemSetSize);
 		optionsMenu.add(optionsItemDecreaseButtonSize);
 		optionsMenu.add(optionsItemIncreaseButtonSize);
@@ -79,6 +83,9 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		}
 		if ("setsizewindow".equals(e.getActionCommand())) {
 			new SetSizeFrame("Set grid size");
+		}
+		if ("reveal".equals(e.getActionCommand())) {
+			StartWindow.reveal();
 		}
 	}
 	
