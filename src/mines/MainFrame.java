@@ -130,6 +130,7 @@ public class MainFrame extends JFrame implements MouseListener {
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			if (!isFlagged(currButton)) {
 				currButton.setContentAreaFilled(false);
+				currButton.removeMouseListener(this);
 				System.out.println(Arrays.asList(buttons).indexOf(currButton));
 				if (isMine(currButton)) {
 					reveal();
