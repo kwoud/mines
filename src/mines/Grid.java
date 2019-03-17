@@ -79,24 +79,26 @@ public class Grid {
 			}
 		}
 	}
-
+  
 	private boolean inGrid(int x, int y) {
-		if ((x < 0) || (x >= gridX) || (y < 0) || (y >= gridY)) {
+		if ((x < 0) || (x >= gridX) ||
+				(y < 0) || (y >= gridY)) {
 			return false;
 		} else
 			return true;
 	}
-
+	
 	private boolean isMine(int x, int y) {
-		if (gridArray[x + (y * gridX)] == 9) {
+		if (gridArray[x +(y * gridX)] == 9) {
 			return true;
 		} else
 			return false;
 	}
-
+	
 	public static int[][] getNeighbour(int x, int y) {
-		int[][] neighbourArray = new int[][] { { x - 1, y - 1 }, { x, y - 1 }, { x + 1, y - 1 }, { x - 1, y },
-				{ x + 1, y }, { x - 1, y + 1 }, { x, y + 1 }, { x + 1, y + 1 } };
+		int[][] neighbourArray = new int[][] {	{x - 1, y - 1}, {x, y - 1}, {x + 1, y - 1}, 
+												{x - 1 , y}, 				{x + 1, y},
+												{x - 1, y + 1}, {x, y + 1}, {x + 1, y + 1}	}; 
 		return neighbourArray;
 	}
 
