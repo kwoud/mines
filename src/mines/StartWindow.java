@@ -15,7 +15,7 @@ public class StartWindow {
 	private static int buttonSize = 24;
 	private static int incrSize = 5;
 	
-	private static int _MENUSIZE_ = 50; 
+	private static final int _MENUSIZE_ = 50; 
 	
 	
 	private static void createAndShowGUI()  {		

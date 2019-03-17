@@ -56,9 +56,6 @@ public class Grid {
 	}
 	
 	public int[][] psblNeighbour(int i, int j) {
-//		int[] neighbourArray = {gridArray[((i - 1) * gridX) + j - 1, ((i - 1) * gridX) + j, ((i - 1) * gridX) + j + 1,
-//		                                  (i * gridX) + j - 1, (i * gridX) + j + 1,
-//		                                  ((i + 1) * gridX) + j - 1, ((i + 1) * gridX) + j, ((i + 1) * gridX) + j + 1};
 		int[][] neighbourArray = new int[][] {	{i - 1, j - 1}, {i, j - 1}, {i + 1, j - 1}, 
 												{i - 1 , j}, 				{i + 1, j},
 												{i - 1, j + 1}, {i, j + 1}, {i + 1, j + 1}	}; 

@@ -18,7 +18,9 @@ public class MainFrame extends JFrame implements MouseListener {
 	private Container c;
 //	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_16x16.png");
 	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_24x24.png");
+	ImageIcon bolt  = new ImageIcon("./src/mines/icon/bolt_24x24.png");
 
+	
 	public MainFrame(String title, int X, int Y) {
 		super(title);
 
