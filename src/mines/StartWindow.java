@@ -22,7 +22,6 @@ public class StartWindow {
 		grid.setGridMines();
 		grid.setGridNumbers();
 		frame = new MainFrame("kwoudMines", grid);
-		setFrameSize();
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -49,22 +48,16 @@ public class StartWindow {
 	
 	public static int getValue(int pos) {return grid.getValue(pos);}
 	
-	public static void setFrameSize() {
-		frame.setSize(grid.getGridX()*buttonSize, grid.getGridY()*buttonSize+MENU_SIZE); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
-	}
-	
 	public static int getMenuSize() {return MENU_SIZE;}
 	
 	public static void increaseSize() {
 		buttonSize += incrSize;
-		setFrameSize();
-		frame.revalidate();
+		frame.refresh();
 	}
 	
 	public static void decreaseSize() {
 		buttonSize -= incrSize;
-		setFrameSize();
-		frame.revalidate();
+		frame.refresh();
 	}
 	
 	public static void setGridSize(int x, int y, int m) {

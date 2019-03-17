@@ -24,15 +24,8 @@ public class MainFrame extends JFrame implements MouseListener {
 	public MainFrame(String title, Grid backend) {
 		super(title);
 		grid = backend;
-
-		// set layout manager
-		setLayout();
-		// create Swing components
-		createButtons();
-		// save content pane in variable
-		c = getContentPane();
-		// add components to container
-		addButtons();
+		c = getContentPane(); // save content pane in variable
+		reframe();
 	}
 
 	public void setLayout() {
@@ -44,10 +37,14 @@ public class MainFrame extends JFrame implements MouseListener {
 		this.setLayout();
 		this.createButtons();
 		this.addButtons();
+		this.refresh();
+		this.repaint();
+	}
+	
+	public void refresh() {
 		int btnSize = StartWindow.getButtonSize();
 		this.setSize(grid.getGridX()*btnSize, grid.getGridY()*btnSize+StartWindow.getMenuSize());
 		this.revalidate();
-		this.repaint();
 	}
 
 	public void removeAll() {

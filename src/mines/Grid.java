@@ -15,6 +15,8 @@ public class Grid {
 	
 	public void newGrid() {
 		gridArray = new int[gridSize];
+		setGridMines();
+		setGridNumbers();
 	}
 
 	public void newGrid(int x, int y, int m) {
