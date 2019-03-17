@@ -16,9 +16,7 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame implements MouseListener {
 	private JButton[] buttons;
 	private Grid grid;
-//	private int gridX, gridY;
 	private Container c;
-//	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_16x16.png");
 	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_24x24.png");
 	ImageIcon bolt  = new ImageIcon("./src/mines/icon/bolt_24x24.png");
 
@@ -26,8 +24,6 @@ public class MainFrame extends JFrame implements MouseListener {
 	public MainFrame(String title, Grid backend) {
 		super(title);
 		grid = backend;
-//		gridX = X;
-//		gridY = Y;
 
 		// set layout manager
 		setLayout();
@@ -42,22 +38,16 @@ public class MainFrame extends JFrame implements MouseListener {
 	public void setLayout() {
 		this.setLayout(new GridLayout(grid.getGridY(), grid.getGridX()));
 	}
-
-	public void setGridSize(int x, int y) {
-//		gridX = x;
-//		gridY = y;
-		this.setLayout(new GridLayout(grid.getGridY(), grid.getGridX()));
-	}
 	
 	public void reframe() {
 		this.removeAll();
-		this.setLayout(new GridLayout(grid.getGridY(), grid.getGridX()));
+		this.setLayout();
 		this.createButtons();
 		this.addButtons();
 		int btnSize = StartWindow.getButtonSize();
 		this.setSize(grid.getGridX()*btnSize, grid.getGridY()*btnSize+StartWindow.getMenuSize());
-		revalidate();
-		repaint();
+		this.revalidate();
+		this.repaint();
 	}
 
 	public void removeAll() {
@@ -69,7 +59,7 @@ public class MainFrame extends JFrame implements MouseListener {
 		Insets insets = new Insets(0, 0, 0, 0);
 		Font font = new Font("CourierNew", Font.BOLD, 24);
 		buttons = new JButton[grid.getGridSize()];
-		for (int i = 0; i < grid.getGridX() * grid.getGridY(); i++) {
+		for (int i = 0; i < grid.getGridSize(); i++) {
 			buttons[i] = new JButton();
 			buttons[i].setMargin(insets);
 			buttons[i].setFont(font);
