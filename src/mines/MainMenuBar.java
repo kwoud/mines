@@ -80,8 +80,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		}
 		if ("reveal".equals(e.getActionCommand())) {
 			StartWindow.reveal();
-	  }
-	
 		}
+
 	}
 }
