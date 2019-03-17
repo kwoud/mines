@@ -7,27 +7,27 @@ import javax.swing.SwingUtilities;
 
 
 public class StartWindow {
+	private static Grid grid;
 	private static MainFrame frame;
 	// set private class variables to standard values
-	private static int gridX = 15;
-	private static int gridY = 10;
-	private static int numMines = 30;
 	private static int buttonSize = 24;
 	private static int incrSize = 5;
 	
-	private static int _MENUSIZE_ = 50; 
+	private static final int MENU_SIZE = 50; 
 	
 	
 	private static void createAndShowGUI()  {		
 		// initiate main frame and create buttons through <MainFrame> constructor
-		frame = new MainFrame("kwoudMines", gridX, gridY);
-		setSize();
+		grid = new Grid();
+		grid.setGridMines();
+		grid.setGridNumbers();
+		frame = new MainFrame("kwoudMines", grid);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// set menu bar
 		JMenuBar menuBar = new MainMenuBar();
-		menuBar.setPreferredSize(new Dimension(0, _MENUSIZE_/2)); // x-value in Dimension doesn't do anything, why?
+		menuBar.setPreferredSize(new Dimension(0, MENU_SIZE/2)); // x-value in Dimension doesn't do anything, why?
 		frame.setJMenuBar(menuBar);
 				
 		// show frame
@@ -36,42 +36,37 @@ public class StartWindow {
 	
 	public static JFrame getFrame() {return frame;}
 	 
-	public static int getGridX() {return gridX;}
+	public static int getGridX() {return grid.getGridX();}
 	
-	public static int getGridY() {return gridY;}
+	public static int getGridY() {return grid.getGridY();}
 	
-	public static void setNumMines(int num) {numMines=num;}
+	public static void setNumMines(int num) {grid.setNumMines(num);}
 	
-	public static int getNumMines() {return numMines;}
+	public static int getNumMines() {return grid.getNumMines();}
 	
 	public static int getButtonSize() {return buttonSize;}
 	
-	public static void setSize() {
-		frame.setSize(gridX*buttonSize, gridY*buttonSize+_MENUSIZE_);
-	}
+	public static int getValue(int pos) {return grid.getValue(pos);}
+	
+	public static int getMenuSize() {return MENU_SIZE;}
 	
 	public static void increaseSize() {
 		buttonSize += incrSize;
-		setSize();
-		frame.revalidate();
+		frame.refresh();
 	}
 	
 	public static void decreaseSize() {
 		buttonSize -= incrSize;
-		setSize();
-		frame.revalidate();
+		frame.refresh();
 	}
 	
-	public static void setGridSize(int x, int y) {
-		gridX = x;
-		gridY = y;
-		frame.removeAll();
-		frame.setGridSize(gridX, gridY);
-		frame.createButtons();
-		frame.addButtons();
-		setSize(); // find better way to deal with menu size; buttons are now squares; maybe introduce new method setSize for class
-		frame.revalidate();
-		frame.repaint();
+	public static void setGridSize(int x, int y, int m) {
+		grid.newGrid(x, y, m);
+		frame.reframe();
+	}
+	
+	public static void reveal() {
+		frame.reveal();
 	}
 	
 	public static void main(String[] args) {
