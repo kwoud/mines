@@ -1,6 +1,8 @@
 package mines;
 
+import java.util.Iterator;
 import java.util.Random;
+import java.util.Vector;
 
 public class Grid {
 	private int[] gridArray;
@@ -88,11 +90,29 @@ public class Grid {
 			return true;
 	}
 	
+	public boolean inGrid(int pos) {
+		if (pos < 0) return false;
+		if (pos >= gridSize) return false;
+		return true;
+	}
+	
 	private boolean isMine(int x, int y) {
 		if (gridArray[x +(y * gridX)] == 9) {
 			return true;
 		} else
 			return false;
+	}
+	
+	public boolean isMine(int pos) {
+		if (gridArray[pos] == 9) return true;
+		else return false;
+	}
+	
+	public boolean isZero(int pos) {
+		assert(pos>0);
+		assert(pos<gridSize);
+		if (gridArray[pos] == 0) return true;
+		else return false;
 	}
 	
 	public static int[][] getNeighbour(int x, int y) {
@@ -101,7 +121,47 @@ public class Grid {
 												{x - 1, y + 1}, {x, y + 1}, {x + 1, y + 1}	}; 
 		return neighbourArray;
 	}
+	
+	public int[] getNeighbour(int pos) {
+		int[] neighbourArray = new int[] {
+				pos-gridX-1, pos-gridX, pos-gridX+1,
+				pos-1,					pos+1,
+				pos+gridX-1, pos+gridX, pos+gridX+1
+		};
+		System.out.print("all:        { ");
+		for (int i=0; i<neighbourArray.length; i++) {
+			System.out.print(neighbourArray[i] + ", ");
+		}
+		System.out.println("}");
+		return neighbourArray;
+	}
+	
+	private boolean areNeighbours(int pos1, int pos2) {
+		if (!inGrid(pos2)) return false;
+		// pos1 at left border and pos2 at right border
+		if (pos1%gridX == 0 && (pos2+1)%gridX==0) return false;
+		// pos1 at right border and pos2 at left border
+		if ((pos1+1)%gridX == 0 && (pos2%gridX==0)) return false;
+		return true;
+	}
 
+	public Vector<Integer> getValidNeighbour(int pos) {
+		Vector<Integer> validNeighs = new Vector<Integer>();
+		int[] allNeighs = getNeighbour(pos);
+		for (int i = 0; i < allNeighs.length; i++) {
+			if (areNeighbours(pos, allNeighs[i])) {
+				validNeighs.add(allNeighs[i]);
+			}
+		}
+		Iterator<Integer> it = validNeighs.iterator();
+		System.out.print("valid:      { ");
+		while (it.hasNext()){
+			System.out.print(it.next() + ", ");
+		}
+		System.out.println("}");
+		return validNeighs;
+	}
+	
 	public void setGridNumbers() {
 		int currX, currY;
 		for (int j = 0; j < gridY; j++) {

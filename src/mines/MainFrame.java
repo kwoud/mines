@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +21,7 @@ public class MainFrame extends JFrame implements MouseListener {
 	private Container c;
 	ImageIcon cloud = new ImageIcon("./src/mines/icon/cloud_24x24.png");
 	ImageIcon bolt  = new ImageIcon("./src/mines/icon/bolt_24x24.png");
-	Color[] colours = new Color[] {Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK, Color.RED, Color.DARK_GRAY, Color.BLACK};
+	Color[] colours = new Color[] {Color.ORANGE, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK, Color.RED, Color.DARK_GRAY, Color.BLACK};
 
 	
 	public MainFrame(String title, Grid backend) {
@@ -72,10 +74,11 @@ public class MainFrame extends JFrame implements MouseListener {
 		}
 	}
 		
-	public void reveal() {
+	public void revealAll() {
 		for (int i = 0; i < grid.getGridSize(); i++) {
 			if(buttons[i].isContentAreaFilled()) {
-				buttons[i].setBackground(Color.GRAY);
+				if (buttons[i].getBackground()!=Color.RED)
+					buttons[i].setBackground(Color.GRAY);
 			}
 			else {
 				if (!isMine(buttons[i]) && isFlagged(buttons[i])) {
@@ -83,9 +86,37 @@ public class MainFrame extends JFrame implements MouseListener {
 					buttons[i].setBackground(Color.GRAY);
 				}
 			}
-			showState(buttons[i]);
-			buttons[i].removeMouseListener(this);
+			revealButton(buttons[i]);
+			//buttons[i].removeMouseListener(this);
 		}
+	}
+	
+	public void revealZeros(int pos) {
+		Vector<Integer> neighs = getUnrevealedNeighbours(pos);
+		Iterator<Integer> it = neighs.iterator();
+		int currPos;
+		while (it.hasNext()) {
+			currPos = it.next();
+			revealButton(buttons[currPos]);
+			buttons[currPos].setContentAreaFilled(false);
+			if (grid.isZero(currPos)) revealZeros(currPos);
+		}
+	}
+	
+	private Vector<Integer> getUnrevealedNeighbours(int pos) {
+		Vector<Integer> unrevealed = new Vector<Integer>();
+		Iterator<Integer> it = grid.getValidNeighbour(pos).iterator();
+		while(it.hasNext()) {
+			int currPos = it.next();
+			if (buttons[currPos].isContentAreaFilled()==true) unrevealed.add(currPos);
+		}
+		it = unrevealed.iterator();
+		System.out.print("unrevealed: {");
+		while (it.hasNext()) {
+			System.out.print(it.next() + ", ");
+		}
+		System.out.println("}");
+		return unrevealed;
 	}
 
 	private boolean isMine(JButton btn) {
@@ -99,25 +130,30 @@ public class MainFrame extends JFrame implements MouseListener {
 		return false;
 	}
 	
-	private void showState(JButton btn) {
-		int val = StartWindow.getValue(Arrays.asList(buttons).indexOf(btn));
-		if (val == 9) {
-			if (!isFlagged(btn)) btn.setIcon(bolt);
+	private void revealButton(JButton btn) {
+		int pos = Arrays.asList(buttons).indexOf(btn);
+		
+		if (grid.isMine(pos)) {
+			if (!isFlagged(btn)) {
+				btn.setIcon(bolt);
+			} 
 		}
-		else if (val == 0) {
+		else if (grid.isZero(pos)) {
 			btn.setIcon(null);
 			btn.setText("");
 		}
 		else {
 			btn.setIcon(null);
-			btn.setText(Integer.toString(val));
-			btn.setForeground(colours[val-1]); 
+			btn.setText(Integer.toString(grid.getValue(pos)));
+			btn.setForeground(colours[grid.getValue(pos)-1]); 
 		}
+		btn.removeMouseListener(this);
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		JButton currButton = (JButton) e.getSource();
+		int currPos = Arrays.asList(buttons).indexOf(currButton);
 		if (e.getButton() == MouseEvent.BUTTON3) {
 				if (isFlagged(currButton)) { // flag button
 					currButton.setIcon(null);
@@ -129,15 +165,20 @@ public class MainFrame extends JFrame implements MouseListener {
 		}
 		if (e.getButton() == MouseEvent.BUTTON1) {
 			if (!isFlagged(currButton)) {
-				currButton.setContentAreaFilled(false);
-				currButton.removeMouseListener(this);
-				System.out.println(Arrays.asList(buttons).indexOf(currButton));
-				if (isMine(currButton)) {
-					reveal();
+				System.out.println(currPos);
+				if (grid.isZero(currPos)) {
+					currButton.setContentAreaFilled(false);
+					revealZeros(currPos);
+				}
+				else if (grid.isMine(currPos)) {
 					currButton.setContentAreaFilled(true);
 					currButton.setBackground(Color.RED);
+					revealAll();
 				}
-				else showState(currButton);
+				else {
+					currButton.setContentAreaFilled(false);
+				}
+				revealButton(currButton);
 			}
 		}
 	}
