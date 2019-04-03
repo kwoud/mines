@@ -18,7 +18,7 @@ public class SetSizeFrame extends JFrame {
 
 	private SpinnerModel modelX = new SpinnerNumberModel(StartWindow.getGridX(), 1, 20, 1);
 	private SpinnerModel modelY = new SpinnerNumberModel(StartWindow.getGridY(), 1, 20, 1);
-	private SpinnerModel modelM = new SpinnerNumberModel(10, 1, StartWindow.getGridX() * StartWindow.getGridY(), 1);
+	private SpinnerModel modelM = new SpinnerNumberModel(StartWindow.getNumMines(), 1, StartWindow.getGridX() * StartWindow.getGridY(), 1);
 	private JSpinner spinnerX = new JSpinner(modelX);
 	private JSpinner spinnerY = new JSpinner(modelY);
 	private JSpinner spinnerM = new JSpinner(modelM);

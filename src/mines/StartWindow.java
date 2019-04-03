@@ -66,7 +66,7 @@ public class StartWindow {
 	}
 	
 	public static void reveal() {
-		frame.reveal();
+		frame.revealAll();
 	}
 	
 	public static void main(String[] args) {
