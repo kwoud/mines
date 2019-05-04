@@ -15,6 +15,7 @@ public class StartWindow {
 	
 	private static final int MENU_SIZE = 50; 
         // test line
+        // another test line
 	
 	private static void createAndShowGUI()  {		
 		// initiate main frame and create buttons through <MainFrame> constructor
