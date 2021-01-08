@@ -22,7 +22,7 @@ public class StartWindow {
 		grid.setGridMines();
 		grid.setGridNumbers();
 		frame = new MainFrame("kwoudMines", grid);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// set menu bar
@@ -58,6 +58,10 @@ public class StartWindow {
 	public static void decreaseSize() {
 		buttonSize -= incrSize;
 		frame.refresh();
+	}
+	
+	public static void setButtonSize(int size) {
+		buttonSize = size;
 	}
 	
 	public static void setGridSize(int x, int y, int m) {

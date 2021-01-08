@@ -2,9 +2,13 @@ package mines;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
@@ -15,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class MainFrame extends JFrame implements MouseListener {
+public class MainFrame extends JFrame implements MouseListener, ComponentListener {
 	private JButton[] buttons;
 	private Grid grid;
 	private Container c;
@@ -27,6 +31,7 @@ public class MainFrame extends JFrame implements MouseListener {
 	public MainFrame(String title, Grid backend) {
 		super(title);
 		grid = backend;
+		this.addComponentListener(this);
 		c = getContentPane(); // save content pane in variable
 		reframe();
 	}
@@ -194,5 +199,43 @@ public class MainFrame extends JFrame implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) { /* do nothing */ }
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		/*
+		int width_ = grid.getGridX();
+		int height_ = grid.getGridY();
+		Rectangle b = e.getComponent().getBounds();
+		e.getComponent().setBounds(b.x, b.y, b.width, b.width*height_/width_);
+		*/
+		
+		double btnSizeX = this.getSize().getWidth() / grid.getGridX();
+		double btnSizeY = this.getSize().getHeight() / grid.getGridY();
+		if (btnSizeX < btnSizeY) {
+			StartWindow.setButtonSize((int) Math.floor(btnSizeX));
+		}
+		else {
+			StartWindow.setButtonSize((int) Math.floor(btnSizeY));
+		}
+		this.refresh();
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
