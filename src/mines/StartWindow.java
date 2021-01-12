@@ -35,9 +35,15 @@ public class StartWindow {
 	}
 	
 	public static JFrame getFrame() {return frame;}
-	 
+
+	public static void setGridX(int x) {
+		grid.setGridX(x);}
+    
 	public static int getGridX() {return grid.getGridX();}
-	
+
+	public static void setGridY(int y) {
+		grid.setGridY(y);}
+
 	public static int getGridY() {return grid.getGridY();}
 	
 	public static void setNumMines(int num) {grid.setNumMines(num);}
@@ -64,9 +70,9 @@ public class StartWindow {
 		buttonSize = size;
 	}
 	
-	public static void setGridSize(int x, int y, int m) {
-		grid.newGrid(x, y, m);
-		frame.reframe();
+	public static void drawGrid() {
+	    grid.newGrid(getGridX(), getGridY(), getNumMines());
+	    frame.reframe();
 	}
 	
 	public static void reveal() {

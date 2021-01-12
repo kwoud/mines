@@ -22,11 +22,15 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 		this.add(helpMenu);
 
 		// create and add menu items to file menu
+		JMenuItem fileItemNew = new JMenuItem("New Game");
+		fileItemNew.setActionCommand("newgame");
+		fileItemNew.addActionListener(this);
 		JMenuItem fileItemOpen = new JMenuItem("Open...");
 		JMenuItem fileItemSave = new JMenuItem("Save...");
 		JMenuItem fileItemExit = new JMenuItem("Exit");
 		fileItemExit.setActionCommand("exitprogramm");
 		fileItemExit.addActionListener(this);
+		fileMenu.add(fileItemNew);
 		fileMenu.add(fileItemOpen);
 		fileMenu.add(fileItemSave);
 		fileMenu.add(fileItemExit);
@@ -58,29 +62,32 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if ("exitprogramm".equals(e.getActionCommand())) {
-			int dialogButton = JOptionPane.showConfirmDialog(null, "Really quit?", "Exit Warning",
-					JOptionPane.YES_NO_OPTION);
-			if (dialogButton == JOptionPane.YES_OPTION) {
-				System.exit(0);
-			}
+	    if ("newgame".equals(e.getActionCommand())) {
+		StartWindow.drawGrid();
+	    }
+	    if ("exitprogramm".equals(e.getActionCommand())) {
+		int dialogButton = JOptionPane.showConfirmDialog(null, "Really quit?", "Exit Warning",
+								 JOptionPane.YES_NO_OPTION);
+		if (dialogButton == JOptionPane.YES_OPTION) {
+		    System.exit(0);
 		}
-		if ("about".equals(e.getActionCommand())) {
-			JOptionPane.showMessageDialog(null, "This is kwoudMines version 0.0.x", "About kwoudMines",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
-		if ("increase".equals(e.getActionCommand())) {
-			StartWindow.increaseSize();
-		}
-		if ("decrease".equals(e.getActionCommand())) {
-			StartWindow.decreaseSize();
-		}
-		if ("setsizewindow".equals(e.getActionCommand())) {
-			new SetSizeFrame("Set grid size");
-		}
-		if ("reveal".equals(e.getActionCommand())) {
-			StartWindow.reveal();
-		}
+	    }
+	    if ("about".equals(e.getActionCommand())) {
+		JOptionPane.showMessageDialog(null, "This is kwoudMines version 0.0.x", "About kwoudMines",
+					      JOptionPane.INFORMATION_MESSAGE);
+	    }
+	    if ("increase".equals(e.getActionCommand())) {
+		StartWindow.increaseSize();
+	    }
+	    if ("decrease".equals(e.getActionCommand())) {
+		StartWindow.decreaseSize();
+	    }
+	    if ("setsizewindow".equals(e.getActionCommand())) {
+		new SetSizeFrame("Set grid size");
+	    }
+	    if ("reveal".equals(e.getActionCommand())) {
+		StartWindow.reveal();
+	    }
 
 	}
 }

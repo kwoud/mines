@@ -38,8 +38,10 @@ public class SetSizeFrame extends JFrame {
 		spinnerY.addChangeListener(l -> setModelM());
 
 		okButton.addActionListener(e -> {
-			StartWindow.setGridSize((Integer) spinnerX.getValue(), (Integer) spinnerY.getValue(),
-					(Integer) spinnerM.getValue());
+			StartWindow.setGridX((Integer) spinnerX.getValue());
+			StartWindow.setGridY((Integer) spinnerY.getValue());
+			StartWindow.setNumMines((Integer) spinnerM.getValue());
+			StartWindow.drawGrid();
 		});
 		cancelButton.addActionListener(e -> dispose());
 
