@@ -42,7 +42,7 @@ public class StartWindow {
 	public static int getGridX() {return grid.getGridX();}
 
 	public static void setGridY(int y) {
-		grid.setGridX(y);}
+		grid.setGridY(y);}
 
 	public static int getGridY() {return grid.getGridY();}
 	
