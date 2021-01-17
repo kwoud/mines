@@ -160,12 +160,12 @@ public class MainFrame extends JFrame implements MouseListener, ComponentListene
 		JButton currButton = (JButton) e.getSource();
 		int currPos = Arrays.asList(buttons).indexOf(currButton);
 		if (e.getButton() == MouseEvent.BUTTON3) {
-				if (isFlagged(currButton)) { // flag button
+				if (isFlagged(currButton)) { // unflag button
 					currButton.setIcon(null);
-					currButton.setContentAreaFilled(true);
-				} else { // unflag button
+					// currButton.setContentAreaFilled(true);
+				} else { // flag button
 					currButton.setIcon(cloud);
-					currButton.setContentAreaFilled(false);
+					// currButton.setContentAreaFilled(false);
 				}
 		}
 		if (e.getButton() == MouseEvent.BUTTON1) {
