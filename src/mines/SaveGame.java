@@ -24,12 +24,12 @@ public class SaveGame {
 		return gridString;
 	}
 
-	private static void createFile() {
+	private static void createFile(File file) {
 		try {
-			if (saveFile.getParentFile().mkdir()) {
-				saveFile.createNewFile();
+			if (file.getParentFile().mkdir()) {
+				file.createNewFile();
 			} else {
-				throw new IOException("Failed to create directory " + saveFile.getParent());
+				throw new IOException("Failed to create directory " + file.getParent());
 			}
 		} catch (Exception e) {
 			System.out.println("An error occurred.");
@@ -37,9 +37,9 @@ public class SaveGame {
 		}
 	}
 
-	private static void writeToFile(String string) {
+	private static void writeToFile(File file, String string) {
 		try {
-			FileWriter writerObj = new FileWriter(saveFile);
+			FileWriter writerObj = new FileWriter(file);
 			writerObj.write(string);
 			writerObj.close();
 			System.out.println("Successfully saved game.");
@@ -50,7 +50,7 @@ public class SaveGame {
 	}
 
 	public static void saveGrid() {
-		createFile();
-		writeToFile(gridAsString(grid));
+		createFile(saveFile);
+		writeToFile(saveFile, gridAsString(grid));
 	}
 }
