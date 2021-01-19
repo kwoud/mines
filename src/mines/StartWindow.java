@@ -34,7 +34,7 @@ public class StartWindow {
 		frame.setVisible(true);
 	}
 	
-	public static JFrame getFrame() {return frame;}
+	public static MainFrame getFrame() {return frame;}
 
         public static Grid getGrid() {return grid;}
 

@@ -14,10 +14,13 @@ public class SaveGame {
 		int x = grid.getGridX();
 		int y = grid.getGridY();
 		int[] gridArr = grid.getGrid();
+		MainFrame frame = StartWindow.getFrame();
+		char[] stateArr = frame.getButtonStates();
 		String gridString = new String();
 		for (int row = 0; row != y; ++row) {
 			for (int col = 0; col != x; ++col) {
-				gridString += Integer.toString(gridArr[row * x + col]) + " ";
+				gridString += Integer.toString(gridArr[row * x + col]) +
+				    stateArr[row * x + col] + "|";
 			}
 			gridString += "\n";
 		}

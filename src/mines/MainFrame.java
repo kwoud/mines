@@ -95,6 +95,20 @@ public class MainFrame extends JFrame implements MouseListener, ComponentListene
 			//buttons[i].removeMouseListener(this);
 		}
 	}
+
+	public char[] getButtonStates() {
+		char[] state = new char[grid.getGridSize()];
+		for (int i = 0; i != state.length; ++i) {
+			if (isFlagged(buttons[i])) {
+				state[i] = 'F'; // "F" for flagged
+			} else if (!buttons[i].isContentAreaFilled()) {
+				state[i] = 'r'; // "r" for revealed
+			} else {
+				state[i] = ' ';
+			}
+		}
+		return state;
+	}
 	
 	public void revealZeros(int pos) {
 		Vector<Integer> neighs = getUnrevealedNeighbours(pos);
