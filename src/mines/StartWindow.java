@@ -36,6 +36,8 @@ public class StartWindow {
 	
 	public static JFrame getFrame() {return frame;}
 
+        public static Grid getGrid() {return grid;}
+
 	public static void setGridX(int x) {
 		grid.setGridX(x);}
     

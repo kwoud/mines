@@ -23,11 +23,13 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 
 		// create and add menu items to file menu
 		JMenuItem fileItemNew = new JMenuItem("New Game");
-		fileItemNew.setActionCommand("newgame");
-		fileItemNew.addActionListener(this);
 		JMenuItem fileItemOpen = new JMenuItem("Open...");
 		JMenuItem fileItemSave = new JMenuItem("Save...");
 		JMenuItem fileItemExit = new JMenuItem("Exit");
+		fileItemNew.setActionCommand("newgame");
+		fileItemNew.addActionListener(this);
+		fileItemSave.setActionCommand("savegame");
+		fileItemSave.addActionListener(this);
 		fileItemExit.setActionCommand("exitprogramm");
 		fileItemExit.addActionListener(this);
 		fileMenu.add(fileItemNew);
@@ -64,6 +66,9 @@ public class MainMenuBar extends JMenuBar implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	    if ("newgame".equals(e.getActionCommand())) {
 		StartWindow.drawGrid();
+	    }
+	    if ("savegame".equals(e.getActionCommand())) {
+		SaveGame.saveGrid();
 	    }
 	    if ("exitprogramm".equals(e.getActionCommand())) {
 		int dialogButton = JOptionPane.showConfirmDialog(null, "Really quit?", "Exit Warning",
